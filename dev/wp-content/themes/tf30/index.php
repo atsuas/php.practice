@@ -267,6 +267,7 @@
 
 			</main><!-- /primary -->
 
+		<!-- secondaryから下をget_sidebar()に置き換える -->
 		<?php get_sidebar(); ?>
 
 	</div><!-- /inner -->
