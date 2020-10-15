@@ -267,6 +267,7 @@
 
 			</main><!-- /primary -->
 
+		<?php get_sidebar(); ?>
 
 	</div><!-- /inner -->
     </div><!-- /content -->
