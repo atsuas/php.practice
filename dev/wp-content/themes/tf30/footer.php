@@ -1,17 +1,26 @@
 <!-- footer-menu -->
 <div id="footer-menu">
 		<div class="inner">
-			<div class="footer-logo"><a href="/">TF-30</a></div><!-- /footer-logo -->
-			<div class="footer-sub">サブタイトルが入りますサブタイトルが入ります</div><!-- /footer-sub -->
+			
+			<?php if (is_home() || is_front_page() ) : //トップページではロゴをh1に、それ以外のページではdivに。 ?>
+			<h1 class="footer-logo"><a href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a></h1><!-- /header-logo -->
+			<?php else : ?>
+			<div class="footer-logo"><a href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a></div><!-- /header-logo -->
+			<?php endif; ?>
+			<div class="footer-sub"><?php bloginfo('description'); //ブログのdescriptionを表示 ?></div><!-- /header-sub -->
 
 			<nav class="footer-nav">
-				<ul class="footer-list">
-					<li class="menu-item"><a href="#">メニュー1</a></li>
-					<li class="menu-item"><a href="#">メニュー2</a></li>
-					<li class="menu-item"><a href="#">メニュー3</a></li>
-					<li class="menu-item"><a href="#">メニュー4</a></li>
-					<li class="menu-item"><a href="#">メニュー5</a></li>
-				</ul>
+			<?php
+			wp_nav_menu(
+			//.footer-listを置き換えて、PC用メニューを動的に表示する
+			array(
+				'depth' => 1,
+				'theme_location' => 'global', //グローバルメニューをここに表示すると指定
+				'container' => 'false',
+				'menu_class' => 'footer-list',
+			)
+			);
+			?>
 			</nav>
 
 		</div><!-- /inner -->
