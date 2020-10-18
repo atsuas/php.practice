@@ -631,7 +631,7 @@ select:focus {
 }
 
 .drawer-nav li:nth-child(2) > a::before {
-	content: "\f02d";
+	content: "\f02";
 }
 
 .drawer-nav li:nth-child(3) > a::before {
