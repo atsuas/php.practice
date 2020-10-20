@@ -52,6 +52,19 @@
 			<!-- primary -->
 			<main id="primary">
 
+    <!-- breadcrumb -->
+    <div class="breadcrumb">
+    <?php bcn_display(); //BreadcrumbNavXTのパンくずを表示するための記述 ?>
+    </div><!-- /breadcrumb -->
+
+    <div class="archive-head m_description">
+        <div class="archive-lead">ARCHIVE</div>
+            <h1 class="archive-title m_category"><?php the_archive_title(); //一覧ページ名を表示 ?></h1>
+        <div class="archive-description">
+            <p><?php the_archive_description(); //説明を表示 ?></p>
+        </div><!-- /archive-description -->
+    </div><!-- /archive-head -->
+
 
     <?php
 	//記事があればentriesブロック以下を表示
