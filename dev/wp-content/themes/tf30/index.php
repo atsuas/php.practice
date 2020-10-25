@@ -4,7 +4,7 @@
     <?php get_header(); ?>
 
 	<!-- pickupから下をget_template_part()に置き換える -->
-    <?php get_template_part('template-parts/pickup'); ?>
+    <?php get_template_part('template-parts/pickup_by_tag'); ?>
 
 
 	<!-- content -->
