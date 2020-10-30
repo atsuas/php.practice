@@ -284,4 +284,3 @@ function my_archive_title( $title ) {
         return '<pre><code class="'.$extension.'">'.$code.'</code></pre>';
         }
         add_shortcode( 'highlight', 'my_shortcode_highlight');
-    ?>
