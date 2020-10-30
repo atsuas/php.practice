@@ -38,6 +38,8 @@ function my_script_init()
 {
 wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v5.8.2/css/all.css', array(), '5.8.2', 'all');
 wp_enqueue_style('my', get_template_directory_uri() . '/css/style.css', array(), '1.0.0', 'all');
+wp_enqueue_style('style_highlight', get_template_directory_uri() . '/css/tomorrow-night.css', array(), '1.0.0', 'all');//highlight.jsのcssファイルを読み込む
+wp_enqueue_script('js_highlight', get_template_directory_uri() . '/js/highlight.pack.js', array(), "10.3.1", true);//highlight.jsのjsファイルを読み込む
 wp_enqueue_script('my', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), '1.0.0', true);
 //sns.jsを追記
 if( is_single() ){
@@ -222,5 +224,64 @@ function my_archive_title( $title ) {
     
 
 
+    
+    /**
+
+    * 検索結果から固定ページを除外する
+
+    * @param string $search SQLのWHERE句の検索条件文
+
+    * @param object $wp_query WP_Queryのオブジェクト
+
+    * @return string $search 条件追加後の検索条件文
+
+    */
+
+    function my_posts_search( $search, $wp_query ){
+
+        //検索結果ページ・メインクエリ・管理画面以外の3つの条件が揃った場合
+
+    if ( $wp_query->is_search() && $wp_query->is_main_query() && !is_admin() ){
+
+        // 検索結果を投稿タイプに絞る
+
+    $search .= " AND post_type = 'post' ";
+
+    return $search;
+
+    }
+    return $search;
+
+    }
+
+    add_filter('posts_search','my_posts_search', 10, 2);
 
 
+
+    /**
+    * ボタンのショートコード
+    *
+    * @param array $atts ショートコードの引数.
+    * @param string $content ショートコードのコンテンツ.
+    * @return string ボタンのHTMLタグ.
+    * @codex https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/add_shortcode
+    */
+    function my_shortcode( $atts, $content = '' ) {
+        return '<div class="entry-btn"><a class="btn" href="' . $atts['link'] . '">' . $content . '</a></div><!-- /entry-btn -->';
+        }
+        add_shortcode( 'btn', 'my_shortcode' );
+
+    /**
+    * highlight.jsのショートコード
+    * @codex https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/add_shortcode
+    */
+    function my_shortcode_highlight( $atts, $content = null ) {
+        extract( shortcode_atts( array(
+            'code' => '',
+            'extension' => ''
+        ), $atts ) );
+
+        return '<pre><code class="'.$extension.'">'.$code.'</code></pre>';
+        }
+        add_shortcode( 'highlight', 'my_shortcode_highlight');
+    ?>
