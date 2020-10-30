@@ -82,11 +82,11 @@
                     <?php my_get_post_tags(); ?>
                     </div><!-- /entry-tag-items -->
 
-        <pre><code>body {
-        background: #fff;
-        font-size: 1em;
-        }
-        </code></pre>
+                    <pre><code>body {
+  background: #fff;
+  font-size: 1em;
+}
+</code></pre>
 
         <?php echo do_shortcode('[btn link="http://localhost:8888/dev/お問い合わせ/"]お問い合わせはこちら[/btn]'); ?>
 
