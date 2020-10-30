@@ -82,8 +82,15 @@
                     <?php my_get_post_tags(); ?>
                     </div><!-- /entry-tag-items -->
 
+        <pre><code>body {
+        background: #fff;
+        font-size: 1em;
+        }
+        </code></pre>
 
-					<!-- entry-related -->
+        <?php echo do_shortcode('[btn link="http://localhost:8888/dev/お問い合わせ/"]お問い合わせはこちら[/btn]'); ?>
+
+	<!-- entry-related -->
     <div class="entry-related">
         <div class="related-title">関連記事</div>
 
@@ -139,7 +146,7 @@
             <?php get_sidebar(); ?>
 
 		</div><!-- /inner -->
-	</div><!-- /content -->
+    </div><!-- /content -->
 
 	<!-- footer-menuから下をget_footer()に置き換える -->
     <?php get_footer(); ?>

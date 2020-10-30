@@ -19,7 +19,7 @@
 	<meta name="twitter:card" content="summary_large_image">
 
 	<?php wp_head(); ?>
-    <link rel="icon" href="./img/icon-home.png">
+	<link rel="icon" href="./img/icon-home.png">
 
 </head>
 

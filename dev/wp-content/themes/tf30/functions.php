@@ -38,6 +38,8 @@ function my_script_init()
 {
 wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v5.8.2/css/all.css', array(), '5.8.2', 'all');
 wp_enqueue_style('my', get_template_directory_uri() . '/css/style.css', array(), '1.0.0', 'all');
+wp_enqueue_style('style_highlight', get_template_directory_uri() . '/css/tomorrow-night.css', array(), '1.0.0', 'all');//highlight.jsのcssファイルを読み込む
+wp_enqueue_script('js_highlight', get_template_directory_uri() . '/js/highlight.pack.js', array(), "10.3.1", true);//highlight.jsのjsファイルを読み込む
 wp_enqueue_script('my', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), '1.0.0', true);
 //sns.jsを追記
 if( is_single() ){
@@ -253,3 +255,33 @@ function my_archive_title( $title ) {
     }
 
     add_filter('posts_search','my_posts_search', 10, 2);
+
+
+
+    /**
+    * ボタンのショートコード
+    *
+    * @param array $atts ショートコードの引数.
+    * @param string $content ショートコードのコンテンツ.
+    * @return string ボタンのHTMLタグ.
+    * @codex https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/add_shortcode
+    */
+    function my_shortcode( $atts, $content = '' ) {
+        return '<div class="entry-btn"><a class="btn" href="' . $atts['link'] . '">' . $content . '</a></div><!-- /entry-btn -->';
+        }
+        add_shortcode( 'btn', 'my_shortcode' );
+
+    /**
+    * highlight.jsのショートコード
+    * @codex https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/add_shortcode
+    */
+    function my_shortcode_highlight( $atts, $content = null ) {
+        extract( shortcode_atts( array(
+            'code' => '',
+            'extension' => ''
+        ), $atts ) );
+
+        return '<pre><code class="'.$extension.'">'.$code.'</code></pre>';
+        }
+        add_shortcode( 'highlight', 'my_shortcode_highlight');
+    ?>
